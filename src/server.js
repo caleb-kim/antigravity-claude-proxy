@@ -724,12 +724,16 @@ app.post('/v1/messages', async (req, res) => {
         } = req.body;
 
         // Resolve model mapping if configured
-        let requestedModel = model || 'claude-3-5-sonnet-20241022';
+        let requestedModel = model || 'gemini-2.5-flash';
         const modelMapping = config.modelMapping || {};
         if (modelMapping[requestedModel] && modelMapping[requestedModel].mapping) {
             const targetModel = modelMapping[requestedModel].mapping;
             logger.info(`[Server] Mapping model ${requestedModel} -> ${targetModel}`);
             requestedModel = targetModel;
+        } else if (requestedModel.includes('opus')) {
+            requestedModel = 'gemini-2.5-pro';
+        } else if (requestedModel.includes('sonnet') || requestedModel.includes('haiku') || requestedModel.startsWith('claude-')) {
+            requestedModel = 'gemini-2.5-flash';
         }
 
         const modelId = requestedModel;
@@ -772,6 +776,7 @@ app.post('/v1/messages', async (req, res) => {
         // Build the request object
         const request = {
             model: modelId,
+            originalModel: model || 'claude-3-5-sonnet-20241022',
             messages,
             max_tokens: max_tokens || 4096,
             stream,

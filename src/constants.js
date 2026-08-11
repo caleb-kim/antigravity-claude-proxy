@@ -123,7 +123,7 @@ export const ONBOARD_USER_ENDPOINTS = ANTIGRAVITY_ENDPOINT_FALLBACKS;
 export const LOAD_CODE_ASSIST_HEADERS = ANTIGRAVITY_HEADERS;
 
 // Default project ID if none can be discovered
-export const DEFAULT_PROJECT_ID = 'rising-fact-p41fc';
+export const DEFAULT_PROJECT_ID = process.env.ANTIGRAVITY_PROJECT_ID || 'caleb-agy';
 
 // Configurable constants - values from config.json take precedence
 export const TOKEN_REFRESH_INTERVAL_MS = config?.tokenCacheTtlMs || (5 * 60 * 1000); // From config or 5 minutes

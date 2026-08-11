@@ -328,6 +328,9 @@ export async function isValidModel(modelId, token, projectId = null) {
 
         // If cache is populated, validate against it
         if (modelCache.validModels.size > 0) {
+            if (modelId.startsWith('claude-') || modelId.includes('sonnet') || modelId.includes('opus') || modelId.includes('haiku')) {
+                return true;
+            }
             return modelCache.validModels.has(modelId);
         }
 
