@@ -731,9 +731,13 @@ app.post('/v1/messages', async (req, res) => {
             logger.info(`[Server] Mapping model ${requestedModel} -> ${targetModel}`);
             requestedModel = targetModel;
         } else if (requestedModel.includes('opus')) {
-            requestedModel = 'gemini-3.1-pro-low';
-        } else if (requestedModel.includes('sonnet') || requestedModel.includes('haiku') || requestedModel.startsWith('claude-')) {
+            requestedModel = 'gemini-3.1-pro-high';
+        } else if (requestedModel.includes('sonnet')) {
+            requestedModel = 'gemini-3.6-flash-high';
+        } else if (requestedModel.includes('haiku')) {
             requestedModel = 'gemini-3.6-flash-low';
+        } else if (requestedModel.startsWith('claude-')) {
+            requestedModel = 'gemini-3.6-flash-high';
         }
 
         const modelId = requestedModel;
