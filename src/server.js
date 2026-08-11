@@ -731,9 +731,9 @@ app.post('/v1/messages', async (req, res) => {
             logger.info(`[Server] Mapping model ${requestedModel} -> ${targetModel}`);
             requestedModel = targetModel;
         } else if (requestedModel.includes('opus')) {
-            requestedModel = 'gemini-2.5-pro';
+            requestedModel = 'gemini-3.1-pro-low';
         } else if (requestedModel.includes('sonnet') || requestedModel.includes('haiku') || requestedModel.startsWith('claude-')) {
-            requestedModel = 'gemini-2.5-flash';
+            requestedModel = 'gemini-3.6-flash-low';
         }
 
         const modelId = requestedModel;
